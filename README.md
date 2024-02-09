@@ -22,8 +22,7 @@ This Inventory Management System is designed to facilitate efficient inventory m
 2. Once logged in, you can perform various inventory management operations such as adding, updating, deleting, and searching for items.
 3. Logout when you're done using the system.
 
-## Screenshots
-[Add screenshots of your application here]
+[//]: # (## Screenshots)
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or pull requests for any improvements or bug fixes.
