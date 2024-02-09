@@ -8,7 +8,7 @@ This Inventory Management System is designed to facilitate efficient inventory m
 - **Data Persistence:** Inventory data is stored persistently using Oracle XE database to prevent data loss and ensure data integrity.
 - **API Integration:** Utilizes Jersey for developing RESTful Web Services.
 - **Email Notifications:** Integrated Gmail SMTP for sending email notifications regarding email verification .
-- **Java 17 Jakarta:** Developed using OpenJDK 17 for robust and efficient performance.
+- **Java:** Developed using OpenJDK 17 for robust and efficient performance.
 
 ## Setup Instructions
 1. Clone the repository: `git clone https://github.com/MohammadMahdiKhaji/InvManagementProject.git`
@@ -23,6 +23,7 @@ This Inventory Management System is designed to facilitate efficient inventory m
 3. Logout when you're done using the system.
 
 [//]: # (## Screenshots)
+[//]: # (![alt text]&#40;https://drive.google.com/file/d/1tdLHyvyipTmLowIlSIqvDHnhTu8ARp7g/view&#41;)
 
 ## Contributing
 Contributions are welcome! Feel free to open issues or pull requests for any improvements or bug fixes.
