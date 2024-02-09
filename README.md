@@ -13,7 +13,7 @@ This Inventory Management System is designed to facilitate efficient inventory m
 ## Setup Instructions
 1. Clone the repository: `git clone https://github.com/MohammadMahdiKhaji/InvManagementProject.git`
 2. Navigate to the project directory: `cd InvManagementProject`
-3. Set up Oracle XE database according to the provided schema.
+3. Set up Oracle database according to the provided schema.
 4. Compile and run the Java application.
 5. Access the application through a web browser at `http://localhost:8080`
 
