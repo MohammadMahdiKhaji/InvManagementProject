@@ -32,7 +32,7 @@ public class Category implements Serializable {
     @JoinColumn(name = "PARENTID")
     private Category parentId;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category setProduct(Product product) {

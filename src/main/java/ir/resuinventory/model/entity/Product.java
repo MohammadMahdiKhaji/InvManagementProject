@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 
-
 @Entity
 @Table(name = "product_table")
 @SqlResultSetMapping(
@@ -43,6 +42,9 @@ public class Product implements Serializable {
     private long productId;
 
     private String productName;
+
+    @Transient
+    private Category category;
 
     @Transient
     private long categoryId;
