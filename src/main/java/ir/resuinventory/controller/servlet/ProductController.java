@@ -47,7 +47,7 @@ public class ProductController extends HttpServlet {
     private String displayProducts(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
 
         List<Product> products
-                = ProductService.getProductService().selectAllFully();
+                = ProductService.getProductService().selectAllProducts();
 
         String url;
         if (products != null) {

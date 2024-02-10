@@ -19,10 +19,10 @@ public class UserDA implements AutoCloseable {
 
     public String userExists(User user) {
         entityManager = JPA.getJpa().getEntityManager();
-        Query query = entityManager.createQuery("select count(oo.username) from User oo where oo.username = :username");
+        Query query = entityManager.createQuery("select count(oo.username) from User oo where oo.username =: username");
         query.setParameter("username", user.getUsername());
         Long usernameCount = (Long) query.getSingleResult();
-        query = entityManager.createQuery("select count(oo.password) from User oo where oo.password = :password");
+        query = entityManager.createQuery("select count(oo.password) from User oo where oo.password =: password");
         query.setParameter("password", user.getPassword());
         Long passwordCount = (Long) query.getSingleResult();
 

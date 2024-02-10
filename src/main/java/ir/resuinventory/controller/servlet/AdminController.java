@@ -30,6 +30,8 @@ public class AdminController extends HttpServlet {
             url = displayProducts(req, resp);
         } else if (requestURI.endsWith("/addProduct")) {
             url = addProduct(req, resp);
+        } else if (requestURI.endsWith("/editProduct")) {
+            url = editProduct(req, resp);
         }
         getServletContext()
                 .getRequestDispatcher(url)
@@ -46,6 +48,12 @@ public class AdminController extends HttpServlet {
             url = displayProducts(req, resp);
         } else if (requestURI.endsWith("/loadAddProduct")) {
             url = loadAddProduct(req, resp);
+        } else if (requestURI.endsWith("/displayProduct")) {
+            url = displayProduct(req, resp);
+        } else if (requestURI.endsWith("/loadEditProduct")) {
+            url = loadEditProduct(req, resp);
+        } else if (requestURI.endsWith("/deleteProduct")) {
+            url = deleteProduct(req, resp);
         }
         getServletContext()
                 .getRequestDispatcher(url)
@@ -55,8 +63,9 @@ public class AdminController extends HttpServlet {
     //    [{"id":7,"productName":"ASUS ROG Strix","categories":"Gaming Laptops-Laptops-Electronics"}]
     private String displayProducts(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
 
+//        [{"productId":1,"productName":"ASUS ROG Strix","categoryId":4,"categories":"Gaming Laptops-Laptops-Electronics"}]
         List<Product> products
-                = ProductService.getProductService().selectAllFully();
+                = ProductService.getProductService().selectAllProducts();
 
         String url;
         if (products != null) {
@@ -71,8 +80,68 @@ public class AdminController extends HttpServlet {
         return url;
     }
 
-    private void displayProduct(){}
-    private void editProduct(){}
+    private String displayProduct(HttpServletRequest req, HttpServletResponse rsp){
+
+        HttpSession session = req.getSession();
+
+        long productId = Long.parseLong(req.getParameter("productNumber"));
+        List<Product> products = (List<Product>) session.getAttribute("products");
+
+        Product product = null;
+        for (Product temp : products) {
+            product = temp;
+            if (product.getProductId() == productId) {
+                break;
+            }
+        }
+
+        session.setAttribute("product", product);
+
+        return "/admin/product.jsp";
+    }
+    private String loadEditProduct(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
+
+        HttpSession session = req.getSession();
+
+        long productId = Long.parseLong(req.getParameter("productNumber"));
+        List<Product> products = (List<Product>) session.getAttribute("products");
+
+        Product product = null;
+        for (Product temp : products) {
+            product = temp;
+            if (product.getProductId() == productId) {
+                break;
+            }
+        }
+
+        List<Category> categories
+                = CategoryService.getCategoryService().selectAll();
+
+        session.setAttribute("product", product);
+        session.setAttribute("categoryName", product.getCategories().substring(0, product.getCategories().indexOf("-")));
+        session.setAttribute("categories", categories);
+
+        return "/admin/edit_product.jsp";
+    }
+
+    private String editProduct(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
+
+        HttpSession session = req.getSession();
+
+        Product product = (Product) session.getAttribute("product");
+        Category categoryOrg = CategoryService.getCategoryService().selectByName(String.valueOf(session.getAttribute("categoryName")));
+        product.setCategory(categoryOrg);
+
+        Product newProduct = new Product();
+        Category categoryDes = CategoryService.getCategoryService().selectById(Long.parseLong(req.getParameter("categoryId")));
+        String productName = req.getParameter("productName");
+        newProduct.setProductName(productName);
+        newProduct.setCategory(categoryDes);
+
+        ProductService.getProductService().editProduct(product, newProduct);
+
+        return "/admin";
+    }
     private String loadAddProduct(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
 
         List<Category> categories
@@ -92,6 +161,26 @@ public class AdminController extends HttpServlet {
         Product product = new Product();
         product.setProductName(productName);
         ProductService.getProductService().insertProduct(product, categoryId);
+
+        return "/admin";
+    }
+
+    private String deleteProduct(HttpServletRequest req, HttpServletResponse rsp) throws Exception {
+
+        HttpSession session = req.getSession();
+
+        long productId = Long.parseLong(req.getParameter("productNumber"));
+        List<Product> products = (List<Product>) session.getAttribute("products");
+
+        Product product = null;
+        for (Product temp : products) {
+            product = temp;
+            if (product.getProductId() == productId) {
+                break;
+            }
+        }
+
+        ProductService.getProductService().deleteProduct(product);
 
         return "/admin";
     }

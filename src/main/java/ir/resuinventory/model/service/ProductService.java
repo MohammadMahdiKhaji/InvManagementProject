@@ -57,14 +57,27 @@ public class ProductService extends Service<Product, Long> {
 //        }
 //    }
 
+    public List<Product> selectAllProducts() throws Exception {
+        try(ProductDA repository = new ProductDA()) {
+            return repository.selectAllProducts();
+        }
+    }
+
     public Product insertProduct(Product product, long categoryId) throws Exception {
         try(ProductDA repository = new ProductDA()) {
             return repository.insertProduct(product, categoryId);
         }
     }
-    public List<Product> selectAllFully() throws Exception {
+
+    public Product editProduct(Product productOrg, Product productDes) throws Exception {
         try(ProductDA repository = new ProductDA()) {
-            return repository.selectAllFully();
+            return repository.editProduct(productOrg, productDes);
+        }
+    }
+
+    public Product deleteProduct(Product product) throws Exception {
+        try(ProductDA repository = new ProductDA()) {
+            return repository.deleteProduct(product);
         }
     }
 }

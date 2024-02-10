@@ -4,7 +4,7 @@
 
 <!-- start the middle column -->
 
-<section>
+<section id="admin">
 
     <h1>Add Product</h1>
 
@@ -15,14 +15,15 @@
     <!-- Use the JSTL url tag to encode the URL -->
     <form action="<c:url value='/adminController/addProduct'/>" method="post">
 
-        <label for="category">Choose a category:</label>
-        <select name="categoryId" id="category">
+        <label for="category_select">Choose a category:</label>
+        <select name="categoryId" id="category_select">
+            <option value="" selected disabled hidden>Choose here</option>
             <c:forEach var="category" items="${categories}">
                 <option value="${category.categoryId}">${category.categoryName}</option>
             </c:forEach>
         </select><br>
 
-        <label>Product Name</label>
+        <label>Product name:</label>
         <input type="text" name="productName" required><br>
         <label>&nbsp;</label>
         <input type="submit" value="AddProduct" id="submit">

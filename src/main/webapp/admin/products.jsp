@@ -26,8 +26,10 @@
                     <td>${product.productName}</td>
                     <td>${product.categories}</td>
                     <td>
+                        <%--                /displayProduct won't work            --%>
                         <a href="displayProduct?productNumber=${product.productId}">View</a>
-                        <a href="editProduct?productNumber=${product.productId}">Edit</a>
+                        <a href="loadEditProduct?productNumber=${product.productId}">Edit</a>
+                        <a href="deleteProduct?productNumber=${product.productId}">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
