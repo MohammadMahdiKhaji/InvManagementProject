@@ -21,7 +21,6 @@
     </repositories>
 
     <dependencies>
-        <!--        dependency for email smtp -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>jakarta.mail</artifactId>
